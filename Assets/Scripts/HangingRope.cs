@@ -42,7 +42,6 @@ public class HangingRope : MonoBehaviour
     void VrmChange()
     {
         Rigidbody[] rig = CharacterManager._instance.VrmObject.GetComponentsInChildren<Rigidbody>();
-        print(CharacterManager._instance.VrmRagDoll.BuildRagdoll);
         for (int a = 0; a < rig.Length; a++)
         {
 

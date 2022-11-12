@@ -4,7 +4,7 @@ using UnityEngine;
 using VRM;
 public class CharactorFacePanel : SecondWindow
 {
-    VRMBlendShapeProxy proxy;
+    VrmCharacterControl charataer;
     List<BlendValueInfo> InfoList;
 
     public Transform panel;
@@ -16,29 +16,26 @@ public class CharactorFacePanel : SecondWindow
         CharacterManager._instance.OnVrmChange += LoadFaceKey;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void ChangeValue(BlendValueInfo info, float value)
     {
-        proxy.ImmediatelySetValue(info.key, value);
+        charataer.SetFaceBlendShape(info.id, value);
 
     }
 
     void LoadFaceKey()
     {
-        proxy = CharacterManager._instance.VrmObject.GetComponent<RagDollControl>().FaceProxy;
+        charataer = CharacterManager._instance.VrmObject.GetComponent<VrmCharacterControl>();
         InfoList = new List<BlendValueInfo>();
-        for (int a = 0; a < proxy.BlendShapeAvatar.Clips.Count; a++)
+        Mesh mesh = charataer.FaceProxy.sharedMesh;
+        for (int a = 0; a < mesh.blendShapeCount; a++)
         {
-            if (a > content.childCount-1)
+
+            if (a > content.childCount - 1)
             {
                 BlendValueInfo info = new BlendValueInfo();
-                info.name = proxy.BlendShapeAvatar.Clips[a].Key.Name;
-                info.key = proxy.BlendShapeAvatar.Clips[a].Key;
+                info.id = a;
+                info.name = charataer.FaceProxy.sharedMesh.GetBlendShapeName(a);
+                info.value = 0;
                 InfoList.Add(info);
                 GameObject go = Instantiate(sliderPrefab, content);
                 CharactorFaceSlider slider = go.GetComponent<CharactorFaceSlider>();
@@ -48,8 +45,9 @@ public class CharactorFacePanel : SecondWindow
             else
             {
                 BlendValueInfo info = new BlendValueInfo();
-                info.name = proxy.BlendShapeAvatar.Clips[a].Key.Name;
-                info.key = proxy.BlendShapeAvatar.Clips[a].Key;
+                info.id = a;
+                info.name = charataer.FaceProxy.sharedMesh.GetBlendShapeName(a);
+                info.value = 0;
                 InfoList.Add(info);
                 GameObject go = content.GetChild(a).gameObject;
                 CharactorFaceSlider slider = go.GetComponent<CharactorFaceSlider>();
@@ -62,6 +60,7 @@ public class CharactorFacePanel : SecondWindow
 
 public class BlendValueInfo
 {
+    public int id;
     public string name;
-    public BlendShapeKey key;
+    public float value;
 }

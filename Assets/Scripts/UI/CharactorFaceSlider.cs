@@ -23,7 +23,7 @@ public class CharactorFaceSlider : MonoBehaviour
     }
     public void OnSliderChange(float value)
     {
-        text_Value.text = value.ToString();
+        text_Value.text = value.ToString("f2");
         _faceControl.ChangeValue(_blend, value);
     }
 }

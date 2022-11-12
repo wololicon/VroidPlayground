@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8f294eec-3e75-2d27-7cdd-3ca033fa655b": {
+      "ProjectGuid": "8f294eec-3e75-2d27-7cdd-3ca033fa655b",
+      "DisplayName": "Assembly-CSharp-firstpass",
+      "ColorIndex": 0
+    },
+    "1c36962b-7976-49b2-804f-7e4c7adbc689": {
+      "ProjectGuid": "1c36962b-7976-49b2-804f-7e4c7adbc689",
+      "DisplayName": "Assembly-CSharp",
+      "ColorIndex": 1
+    },
+    "8ff0878e-0c4f-b555-a348-042b586d4b65": {
+      "ProjectGuid": "8ff0878e-0c4f-b555-a348-042b586d4b65",
+      "DisplayName": "VRM",
+      "ColorIndex": 2
+    },
+    "14acc3fe-9201-b27c-5a54-473b5c70b9b6": {
+      "ProjectGuid": "14acc3fe-9201-b27c-5a54-473b5c70b9b6",
+      "DisplayName": "UniVRM.Editor",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "杂项文件",
+      "ColorIndex": -1
+    },
+    "7f48f374-2472-1cfa-d2f1-560adbff258d": {
+      "ProjectGuid": "7f48f374-2472-1cfa-d2f1-560adbff258d",
+      "DisplayName": "VRM.Tests",
+      "ColorIndex": 4
+    },
+    "14f5f9a0-e33b-7894-b273-4219ea01262c": {
+      "ProjectGuid": "14f5f9a0-e33b-7894-b273-4219ea01262c",
+      "DisplayName": "UniGLTF",
+      "ColorIndex": 5
+    }
+  },
+  "NextColorIndex": 6
+}

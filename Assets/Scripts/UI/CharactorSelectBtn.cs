@@ -24,6 +24,6 @@ public class CharactorSelectBtn : MonoBehaviour
  
     void LoadVrm()
     {
-        CharacterManager._instance.LoadVrm(_vrm.path);
+        CharacterManager._instance.LoadVrmToCameraPoint(_vrm.path);
     }
 }
