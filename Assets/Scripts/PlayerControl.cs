@@ -68,16 +68,17 @@ public class PlayerControl : MonoBehaviour
             CameraOffset.x = -CameraOffset.x;
         _player.SetMoveDirection(moveDirection, speed);
     }
-
+    public LayerMask _CameraBlockLayer;
     void CheckCameraBlock()
     {
         Vector3 ori, dir;
 
-        ori = _camera.transform.position + _camera.transform.forward * -CameraOffset.z;
-        dir = _camera.transform.position - ori;
+
+        dir = _camera.transform.position - transform.position;
+        ori = transform.position + dir.normalized * 0.3f;
         Ray ray = new Ray(ori, dir);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, -CameraOffset.z))
+        if (Physics.Raycast(ray, out hit, -CameraOffset.z, _CameraBlockLayer))
         {
             Vector3 offset = CameraOffset;
             offset.z = -hit.distance + 0.02f;
@@ -129,23 +130,34 @@ public class PlayerControl : MonoBehaviour
             SetCursorLock(!CursorLock);
         }
 
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    r = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit[] rh;
-        //    rh = Physics.RaycastAll(r);
-        //    for (int i = 0; i < rh.Length; i++)
-        //    {
-        //        print(rh[i].collider.gameObject);
-        //        RagdollHitbox hitbox = rh[i].collider.GetComponent<RagdollHitbox>();
-        //        if (hitbox != null)
-        //        {
-        //            hitbox._ragDoll.SetRagdollActive(true);
-        //            hitbox._rig.AddForceAtPosition(r.direction.normalized * 500, rh[i].point);
-        //            //hitbox._rig.AddExplosionForce(5000, rh[i].point, 10);
-        //        }
-        //    }
-        //}
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] rh;
+            rh = Physics.RaycastAll(r);
+            for (int i = 0; i < rh.Length; i++)
+            {
+                print(rh[i].collider.gameObject);
+                RagdollHitbox hitbox = rh[i].collider.GetComponent<RagdollHitbox>();
+                if (hitbox != null)
+                {
+                    hitbox._ragDoll.SetRagdollActive(true);
+                    hitbox._rig.AddForceAtPosition(r.direction.normalized * 5000, rh[i].point);
+                    //hitbox._rig.AddExplosionForce(5000, rh[i].point, 10);
+                }
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            if(_cameraState == CameraState.Follow)
+            {
+                _cameraState = CameraState.Freelook;
+            }
+            else
+            {
+                _cameraState = CameraState.Follow;
+            }
+        }
     }
 
     public void SetCursorLock(bool value)

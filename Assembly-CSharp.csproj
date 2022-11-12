@@ -61,18 +61,21 @@
     <Compile Include="Assets\Scripts\UI\SecondWindow.cs" />
     <Compile Include="Assets\Scripts\UI\CharactorSelectPanel.cs" />
     <Compile Include="Assets\Scripts\Character\VrmCharacterControl.cs" />
+    <Compile Include="Assets\ItchyOwl\_Common\Extensions\ComponentExtensions.cs" />
     <Compile Include="Assets\Scripts\Character\RuntimeRagdollBuilder.cs" />
     <Compile Include="Assets\Scripts\UI\CharactorSelectBtn.cs" />
     <Compile Include="Assets\Scripts\UI\CharactorFaceSlider.cs" />
     <Compile Include="Assets\Scripts\UI\MenuBtnGroup.cs" />
     <Compile Include="Assets\Scripts\Character\RagdollHitbox.cs" />
     <Compile Include="Assets\Scripts\UI\CharactorFacePanel.cs" />
+    <Compile Include="Assets\ItchyOwl\_Common\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\VrmRuntimeImport\VrmRuntimeImport.cs" />
     <Compile Include="Assets\Scripts\TimeLinePlayer.cs" />
     <Compile Include="Assets\Scripts\HangingRope.cs" />
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
+    <Compile Include="Assets\Scripts\RagDollControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon.shader" />

@@ -323,6 +323,7 @@ class RuntimeRagdollBuilder
         foreach (BoneInfo bone in bones)
         {
             bone.anchor.gameObject.AddComponent<Rigidbody>();
+            bone.anchor.gameObject.layer = 7;
             bone.anchor.GetComponent<Rigidbody>().mass = bone.density;
             bone.anchor.GetComponent<Rigidbody>().drag = 1f;
             bone.anchor.GetComponent<Rigidbody>().angularDrag = 1f;

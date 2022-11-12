@@ -49,7 +49,7 @@ public class CharacterManager : MonoBehaviour
 
     public void LoadVrmToCameraPoint(string path)
     {
-        DestroyImmediate(VrmObject);
+        //DestroyImmediate(VrmObject);
         VrmObject = VrmRuntimeImport.ImportRuntime(path);
         Transform cam = Camera.main.transform;
         Ray r = new Ray(cam.position, cam.forward);
@@ -63,8 +63,17 @@ public class CharacterManager : MonoBehaviour
             VrmObject.transform.position = cam.position;
         }
 
-        VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
+
+        VrmObject.layer = 6;
+        CapsuleCollider MoveCollider = VrmObject.AddComponent<CapsuleCollider>();
+        MoveCollider.center = new Vector3(0, 0.8f, 0);
+        MoveCollider.radius = 0.3f;
+        MoveCollider.height = 1.6f;
+        Rigidbody MoveRigdibody = VrmObject.AddComponent<Rigidbody>();
+        MoveRigdibody.mass = 80;
+        MoveRigdibody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
+        VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
     }
 
 }

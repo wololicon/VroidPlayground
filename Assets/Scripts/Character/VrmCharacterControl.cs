@@ -9,18 +9,18 @@ public class VrmCharacterControl : MonoBehaviour
     public Rigidbody Move_Rig;
     public Vector3 HeadLookAt;
     public Avatar _avatar;
-    public VRMBlendShapeProxy FaceProxy
+    public SkinnedMeshRenderer FaceProxy
     {
         get
         {
             if (_face == null)
-                return GetComponent<VRMBlendShapeProxy>();
+                return transform.Find("Face").GetComponent<SkinnedMeshRenderer>();
             else
                 return _face;
         }
     }
-    VRMBlendShapeProxy _face;
-    public List<string> FaceBlendShape;
+    SkinnedMeshRenderer _face;
+    //public List<BlendValueInfo> FaceBlendShape = new List<BlendValueInfo>();
     public Collider[] HitBoxs;
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,10 @@ public class VrmCharacterControl : MonoBehaviour
         {
             print(_avatar.humanDescription.human[a].boneName);
         }
+        Move_Rig = GetComponent<Rigidbody>();
         Rig_Rag = transform.Find("Root").GetComponentsInChildren<Rigidbody>();
         HitBoxs = transform.Find("Root").GetComponentsInChildren<Collider>();
-        _face = GetComponent<VRMBlendShapeProxy>();
+        _face = transform.Find("Face").GetComponent<SkinnedMeshRenderer>();
         for (int i = 0; i < HitBoxs.Length; i++)
         {
             HitBoxs[i].gameObject.AddComponent<RagdollHitbox>();
@@ -45,10 +46,16 @@ public class VrmCharacterControl : MonoBehaviour
         SetRagdollActive(false);
     }
 
-    public void SetFaceBlendShape(BlendShapeKey key, float value)
+    public void SetFaceBlendShape(int id, float value)
     {
-        _face.ImmediatelySetValue(key, value);
+        _face.SetBlendShapeWeight(id, value);
     }
+    public float GetFaceBlendShapeValue(int id)
+    {
+        return _face.GetBlendShapeWeight(id);
+    }
+
+
 
     public void SetRagdollActive(bool value)
     {
@@ -91,7 +98,7 @@ public class VrmCharacterControl : MonoBehaviour
     private void OnAnimatorIK(int layerIndex)
     {
         animator.SetLookAtPosition(HeadLookAt);
-        animator.SetLookAtWeight(HeadLookAtWeight);
+        animator.SetLookAtWeight(HeadLookAtWeight, HeadLookAtWeight * 0.2f, HeadLookAtWeight, HeadLookAtWeight);
     }
 
     Vector3 offset;

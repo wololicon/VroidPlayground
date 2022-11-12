@@ -16,7 +16,7 @@ public class EnvirmentScripts : MonoBehaviour
             if (CharacterManager._instance.VrmRagDoll != null)
             {
                 CharacterManager._instance.VrmRagDoll.SetRagdollActive(false);
-                CharacterManager._instance.VrmRagDoll.SetFaceBlendShape(BlendShapeKey.CreateUnknown("Surprised"), 1);
+                //CharacterManager._instance.VrmRagDoll.SetFaceBlendShape(BlendShapeKey.CreateUnknown("Surprised"), 1);
             }
             _animator.SetBool("Start", true);
         }
