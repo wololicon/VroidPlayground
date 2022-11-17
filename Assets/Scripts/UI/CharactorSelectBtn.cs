@@ -10,9 +10,13 @@ public class CharactorSelectBtn : MonoBehaviour
     Image _icon;
     [SerializeField]
     Text _name;
+    Button _btn;
+    public delegate void CharBtnEvent(string path);
+    public CharBtnEvent _btnEvent;
     private void Start()
     {
-        GetComponent<Button>().onClick.AddListener(LoadVrm);
+        _btn = GetComponent<Button>();
+        _btn.onClick.AddListener(ButtonEvent);
     }
 
     public void GetVrmInfo(VrmInfo info)
@@ -21,9 +25,9 @@ public class CharactorSelectBtn : MonoBehaviour
         _name.text = _vrm.name;
         _icon.sprite = Sprite.Create(_vrm.icon, new Rect(0, 0, _vrm.icon.width, _vrm.icon.height), new Vector2(0.5f, 0.5f));
     }
- 
-    void LoadVrm()
+
+    void ButtonEvent()
     {
-        CharacterManager._instance.LoadVrmToCameraPoint(_vrm.path);
+        _btnEvent?.Invoke(_vrm.path);
     }
 }

@@ -37,6 +37,13 @@ float _UvAnimScrollX;
 float _UvAnimScrollY;
 float _UvAnimRotation;
 
+sampler2D _DirtMap;
+fixed _Dirtiness;
+fixed _BumpHeight;
+fixed _Transparency;
+fixed3 _DirtColor;
+fixed _Wetness;
+
 //UNITY_INSTANCING_BUFFER_START(Props)
 //UNITY_INSTANCING_BUFFER_END(Props)
 
@@ -50,6 +57,7 @@ struct v2f
     float2 uv0 : TEXCOORD4;
     float isOutline : TEXCOORD5;
     fixed4 color : TEXCOORD6;
+
     UNITY_FOG_COORDS(7)
     UNITY_SHADOW_COORDS(8)
     //UNITY_VERTEX_INPUT_INSTANCE_ID // necessary only if any instanced properties are going to be accessed in the fragment Shader.
@@ -258,6 +266,15 @@ float4 frag_forward(v2f i) : SV_TARGET
 #else
 #endif
 
+
+	fixed4 dirtBase = tex2D(_DirtMap, mainUv);
+
+	if (dirtBase.a < _Dirtiness)
+	{
+		col = lerp(_DirtColor, col, _Transparency);
+		fixed4 bumpCol = tex2D(_BumpMap, mainUv);
+		fixed4 outputBump = lerp(bumpCol, dirtBase, _BumpHeight);//max(bumpCol, dirtBase * _BumpHeight);
+	}
     // debug
 #ifdef MTOON_DEBUG_NORMAL
     #ifdef MTOON_FORWARD_ADD

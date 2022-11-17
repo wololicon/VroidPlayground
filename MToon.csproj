@@ -64,6 +64,7 @@
     <Compile Include="Assets\VRMShaders\VRM\MToon\MToon\Scripts\UtilsVersion.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\VRMShaders\VRM\MToon\MToon\Resources\Shaders\MToon 1.shader" />
     <None Include="Assets\VRMShaders\VRM\MToon\MToon\Resources\Shaders\MToonSM4.cginc" />
     <None Include="Assets\VRMShaders\VRM\MToon\MToon\Resources\Shaders\MToonSM3.cginc" />
     <None Include="Assets\VRMShaders\VRM\MToon\MToon\MToon.asmdef" />

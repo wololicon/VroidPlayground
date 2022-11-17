@@ -35,6 +35,13 @@ Shader "VRM/MToon"
         _UvAnimScrollY ("UV Animation Scroll Y", Float) = 0
         _UvAnimRotation ("UV Animation Rotation", Float) = 0
 
+		_DirtMap("Dirt (Normalmap)", 2D) = "white" {}
+		_Wetness("Wetness", Range(0.00, 1)) = 0.078125
+		_Dirtiness("Dirtiness", Range(0, 1)) = 0.0
+		_BumpHeight("Bump Height", Range(0, 1)) = 1.0
+		_Transparency("Transparency", Range(0, 1)) = 0.0
+		_DirtColor("Dirt Color", Color) = (1,0.0,0.0,0.0)
+
         [HideInInspector] _MToonVersion ("_MToonVersion", Float) = 38
         [HideInInspector] _DebugMode ("_DebugMode", Float) = 0.0
         [HideInInspector] _BlendMode ("_BlendMode", Float) = 0.0
@@ -77,6 +84,8 @@ Shader "VRM/MToon"
             #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
 //            #pragma multi_compile_instancing
+
+			
             ENDCG
         }
 
@@ -109,6 +118,13 @@ Shader "VRM/MToon"
             #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
 //            #pragma multi_compile_instancing
+
+		    #pragma vertex vert
+            #pragma fragment frag
+            // make fog work
+            #pragma multi_compile_fog
+
+            #include "UnityCG.cginc"
             ENDCG
         }
 

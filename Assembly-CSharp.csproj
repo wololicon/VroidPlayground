@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\UI\CharactorFaceSlider.cs" />
     <Compile Include="Assets\Scripts\UI\MenuBtnGroup.cs" />
     <Compile Include="Assets\Scripts\Character\RagdollHitbox.cs" />
+    <Compile Include="Assets\GetDirty\Demo.cs" />
+    <Compile Include="Assets\Scripts\RagDollControl.cs" />
     <Compile Include="Assets\Scripts\UI\CharactorFacePanel.cs" />
     <Compile Include="Assets\ItchyOwl\_Common\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\VrmRuntimeImport\VrmRuntimeImport.cs" />
@@ -75,13 +77,18 @@
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
-    <Compile Include="Assets\Scripts\RagDollControl.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerModelSelectPanel.cs" />
+    <Compile Include="Assets\Scripts\New Folder\DamageCollider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GetDirty\GetDirtyBumpSpec3.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon.shader" />
+    <None Include="Assets\GetDirty\GetDirtyBumpSpec.shader" />
+    <None Include="Assets\GetDirty\GetDirtyBumpSpec2.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_attribute.hlsl" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_vertex.hlsl" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_uv.hlsl" />
+    <None Include="Assets\commy\NewUnlitShader.shader" />
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\NormalMapExporter.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_mtoon.hlsl" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_forward_vertex.hlsl" />
@@ -94,6 +101,7 @@
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\StandardMapImporter.shader" />
     <None Include="Assets\VRMShaders\GLTF\UniUnlit\Resources\UniGLTF\UniUnlit.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
+    <None Include="Assets\GetDirty\GetDirty.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_define.hlsl" />
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,17 @@
       "ProjectGuid": "14f5f9a0-e33b-7894-b273-4219ea01262c",
       "DisplayName": "UniGLTF",
       "ColorIndex": 5
+    },
+    "71eb0867-8265-ed56-f1e7-e7001e301bb8": {
+      "ProjectGuid": "71eb0867-8265-ed56-f1e7-e7001e301bb8",
+      "DisplayName": "MToon",
+      "ColorIndex": 6
+    },
+    "981795c5-1895-6699-4cf8-b303c0a87bc1": {
+      "ProjectGuid": "981795c5-1895-6699-4cf8-b303c0a87bc1",
+      "DisplayName": "MToon.Editor",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 8
 }
