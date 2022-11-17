@@ -13,16 +13,23 @@ public class CharactorSelectPanel : SecondWindow
     void Start()
     {
         VrmInfoList = VrmRuntimeImport.GetVrmList();
-        for(int a=0;a<VrmInfoList.Length;a++)
+        for (int a = 0; a < VrmInfoList.Length; a++)
         {
             GameObject go = Instantiate(_btnPrefab, _content);
-            go.GetComponent<CharactorSelectBtn>().GetVrmInfo(VrmInfoList[a]);
+            CharactorSelectBtn btn = go.GetComponent<CharactorSelectBtn>();
+            btn.GetVrmInfo(VrmInfoList[a]);
+            btn._btnEvent = LoadVrmCharactor;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    void LoadVrmCharactor(string path)
+    {
+        CharacterManager._instance.LoadVrmToCameraPoint(path);
     }
 }

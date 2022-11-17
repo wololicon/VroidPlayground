@@ -52,6 +52,14 @@ namespace MToon
         public const string PropZWrite = "_ZWrite";
         public const string PropAlphaToMask = "_AlphaToMask";
 
+
+        public const string PropDirtMap = "_DirtMap";
+        public const string PropWetness = "_Wetness";
+        public const string PropDirtiness = "_Dirtiness";
+        public const string PropBumpHeight = "_BumpHeight";
+        public const string PropTransparency = "_Transparency";
+        public const string PropDirtColor = "_DirtColor";
+
         public const string KeyNormalMap = "_NORMALMAP";
         public const string KeyAlphaTestOn = "_ALPHATEST_ON";
         public const string KeyAlphaBlendOn = "_ALPHABLEND_ON";

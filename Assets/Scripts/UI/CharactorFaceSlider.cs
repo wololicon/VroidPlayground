@@ -19,7 +19,7 @@ public class CharactorFaceSlider : MonoBehaviour
     {
         _blend = b;
         text_Name.text = _blend.name;
-        _slider.value = 0;
+        _slider.value = b.value;
     }
     public void OnSliderChange(float value)
     {

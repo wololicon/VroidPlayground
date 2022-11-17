@@ -1,9 +1,21 @@
 fileFormatVersion: 2
 guid: 1a97144e4ad27a04aafd70f7b915cedb
-timeCreated: 1514111466
-licenseType: Free
 ShaderImporter:
-  defaultTextures: []
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _ShadeTexture: {instanceID: 0}
+  - _BumpMap: {instanceID: 0}
+  - _ReceiveShadowTexture: {instanceID: 0}
+  - _ShadingGradeTexture: {instanceID: 0}
+  - _RimTexture: {instanceID: 0}
+  - _SphereAdd: {instanceID: 0}
+  - _EmissionMap: {instanceID: 0}
+  - _OutlineWidthTexture: {instanceID: 0}
+  - _UvAnimMaskTexture: {instanceID: 0}
+  - _DirtMap: {fileID: 2800000, guid: 0a85a6942b4e13b479ac3584f2b56718, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

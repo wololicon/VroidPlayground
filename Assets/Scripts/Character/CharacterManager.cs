@@ -5,8 +5,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager _instance;
-    public GameObject VrmObject;
-    public VrmCharacterControl VrmRagDoll;
+    public PlayerControl _playerControl;
     public RuntimeAnimatorController _anim;
     public delegate void OnVrmChangeEvent();
     public OnVrmChangeEvent OnVrmChange;
@@ -21,36 +20,38 @@ public class CharacterManager : MonoBehaviour
 
     GameObject temp;
 
-    private void Update()
-    {
-        if (VrmObject != null && VrmObject != temp)
-        {
-            OnVrmChange?.Invoke();
-            temp = VrmObject;
-        }
-    }
+    //private void Update()
+    //{
+    //    if (VrmObject != null && VrmObject != temp)
+    //    {
+    //        OnVrmChange?.Invoke();
+    //        temp = VrmObject;
+    //    }
+    //}
 
-    public void LoadVrm(string path)
-    {
-        DestroyImmediate(VrmObject);
-        VrmObject = VrmRuntimeImport.ImportRuntime(path);
-        VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
-        VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
-    }
-    public void LoadVrm(string path, Vector3 pos, Vector3 rot)
-    {
-        DestroyImmediate(VrmObject);
-        VrmObject = VrmRuntimeImport.ImportRuntime(path);
-        VrmObject.transform.position = pos;
-        VrmObject.transform.rotation = Quaternion.Euler(rot);
-        VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
-        VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
-    }
-
-    public void LoadVrmToCameraPoint(string path)
+    //public void LoadVrm(string path)
+    //{
+    //    DestroyImmediate(VrmObject);
+    //    VrmObject = VrmRuntimeImport.ImportRuntime(path);
+    //    VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
+    //    VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
+    //}
+    public GameObject LoadVrm(string path, Vector3 pos, Vector3 rot)
     {
         //DestroyImmediate(VrmObject);
-        VrmObject = VrmRuntimeImport.ImportRuntime(path);
+        GameObject VrmObject = VrmRuntimeImport.ImportRuntime(path);
+        VrmObject.transform.parent = transform;
+        VrmObject.transform.position = pos;
+        VrmObject.transform.rotation = Quaternion.Euler(rot);
+        VrmObject.AddComponent<VrmCharacterControl>();
+        VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
+        return VrmObject;
+    }
+
+    public GameObject LoadVrmToCameraPoint(string path)
+    {
+        //DestroyImmediate(VrmObject);
+        GameObject VrmObject = VrmRuntimeImport.ImportRuntime(path);
         Transform cam = Camera.main.transform;
         Ray r = new Ray(cam.position, cam.forward);
         RaycastHit hit;
@@ -73,7 +74,16 @@ public class CharacterManager : MonoBehaviour
         MoveRigdibody.mass = 80;
         MoveRigdibody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         VrmObject.GetComponent<Animator>().runtimeAnimatorController = _anim;
-        VrmRagDoll = VrmObject.AddComponent<VrmCharacterControl>();
+        VrmObject.AddComponent<VrmCharacterControl>();
+        VrmObject.transform.parent = transform;
+        return VrmObject;
+    }
+
+    public void SetPlayerModel(string path)
+    {
+        VrmCharacterControl _player = LoadVrmToCameraPoint(path).GetComponent<VrmCharacterControl>();
+        print(_player);
+        _playerControl.SetPlayer(_player);
     }
 
 }

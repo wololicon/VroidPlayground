@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class PlayerControl : MonoBehaviour
 {
     public VrmCharacterControl _player;
-    public Vector3 CameraOffset;
+    public Vector3 CameraPosOffset;
+    public Vector3 CameraRotOffset;
     float yaw = 0.0f;
     float pitch = 0.0f;
     float turnSpeedH = 1;
@@ -29,7 +30,13 @@ public class PlayerControl : MonoBehaviour
     #region tps ”Ω«
     void CameraFollowMode()
     {
-        _camera.transform.localPosition = CameraOffset;
+        if (_player == null || _player.HP <= 0)
+        {
+            transform.position = _camera.transform.position;
+            _cameraState = CameraState.Freelook;
+            return;
+        }
+        _camera.transform.localPosition = CameraPosOffset;
         CheckCameraBlock();
         transform.position = _player.transform.position + Vector3.up;
         if (CursorLock)
@@ -44,7 +51,7 @@ public class PlayerControl : MonoBehaviour
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
-        Vector3 LookPoint = _camera.transform.position + _camera.transform.forward * 100 - CameraOffset;
+        Vector3 LookPoint = _camera.transform.position + _camera.transform.forward * 100;// - CameraPosOffset;
 
         _player.SetHeadLookPosition(LookPoint);
 
@@ -65,7 +72,7 @@ public class PlayerControl : MonoBehaviour
             speed = _player.WalkSpeed * InputSpeed;
         }
         if (Input.GetKeyDown(KeyCode.Q))
-            CameraOffset.x = -CameraOffset.x;
+            CameraPosOffset.x = -CameraPosOffset.x;
         _player.SetMoveDirection(moveDirection, speed);
     }
     public LayerMask _CameraBlockLayer;
@@ -78,16 +85,24 @@ public class PlayerControl : MonoBehaviour
         ori = transform.position + dir.normalized * 0.3f;
         Ray ray = new Ray(ori, dir);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, -CameraOffset.z, _CameraBlockLayer))
+        if (Physics.Raycast(ray, out hit, -CameraPosOffset.z, _CameraBlockLayer))
         {
-            Vector3 offset = CameraOffset;
+            Vector3 offset = CameraPosOffset;
             offset.z = -hit.distance + 0.02f;
             _camera.transform.localPosition = offset;
         }
         else
         {
-            _camera.transform.localPosition = CameraOffset;
+            _camera.transform.localPosition = CameraPosOffset;
         }
+    }
+
+    public void SetPlayer(VrmCharacterControl vrm)
+    {
+        if(_player != null)
+            Destroy(_player.gameObject);
+        _player = vrm;
+        _cameraState = CameraState.Follow;
     }
     #endregion
     void CameraFreelookMode()
@@ -137,19 +152,21 @@ public class PlayerControl : MonoBehaviour
             rh = Physics.RaycastAll(r);
             for (int i = 0; i < rh.Length; i++)
             {
-                print(rh[i].collider.gameObject);
-                RagdollHitbox hitbox = rh[i].collider.GetComponent<RagdollHitbox>();
-                if (hitbox != null)
-                {
-                    hitbox._ragDoll.SetRagdollActive(true);
-                    hitbox._rig.AddForceAtPosition(r.direction.normalized * 5000, rh[i].point);
-                    //hitbox._rig.AddExplosionForce(5000, rh[i].point, 10);
-                }
+                print(rh[0].textureCoord);
+                print(rh[0].textureCoord2);
+                //print(rh[i].collider.gameObject);
+                //RagdollHitbox hitbox = rh[i].collider.GetComponent<RagdollHitbox>();
+                //if (hitbox != null)
+                //{
+                //    hitbox._ragDoll.SetRagdollActive(true);
+                //    hitbox._rig.AddForceAtPosition(r.direction.normalized * 5000, rh[i].point);
+                //    //hitbox._rig.AddExplosionForce(5000, rh[i].point, 10);
+                //}
             }
         }
-        if(Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            if(_cameraState == CameraState.Follow)
+            if (_cameraState == CameraState.Follow)
             {
                 _cameraState = CameraState.Freelook;
             }
@@ -159,7 +176,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-
     public void SetCursorLock(bool value)
     {
         CursorLock = value;

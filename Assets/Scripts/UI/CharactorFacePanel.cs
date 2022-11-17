@@ -13,7 +13,7 @@ public class CharactorFacePanel : SecondWindow
     // Start is called before the first frame update
     void Start()
     {
-        CharacterManager._instance.OnVrmChange += LoadFaceKey;
+        onWindowOpen += LoadFaceKey;
     }
 
     public void ChangeValue(BlendValueInfo info, float value)
@@ -24,7 +24,9 @@ public class CharactorFacePanel : SecondWindow
 
     void LoadFaceKey()
     {
-        charataer = CharacterManager._instance.VrmObject.GetComponent<VrmCharacterControl>();
+        charataer = CharacterManager._instance._playerControl._player.GetComponent<VrmCharacterControl>();
+        if (charataer == null)
+            return;
         InfoList = new List<BlendValueInfo>();
         Mesh mesh = charataer.FaceProxy.sharedMesh;
         for (int a = 0; a < mesh.blendShapeCount; a++)
@@ -35,7 +37,7 @@ public class CharactorFacePanel : SecondWindow
                 BlendValueInfo info = new BlendValueInfo();
                 info.id = a;
                 info.name = charataer.FaceProxy.sharedMesh.GetBlendShapeName(a);
-                info.value = 0;
+                info.value = charataer.FaceProxy.GetBlendShapeWeight(a);
                 InfoList.Add(info);
                 GameObject go = Instantiate(sliderPrefab, content);
                 CharactorFaceSlider slider = go.GetComponent<CharactorFaceSlider>();
@@ -47,7 +49,7 @@ public class CharactorFacePanel : SecondWindow
                 BlendValueInfo info = new BlendValueInfo();
                 info.id = a;
                 info.name = charataer.FaceProxy.sharedMesh.GetBlendShapeName(a);
-                info.value = 0;
+                info.value = charataer.FaceProxy.GetBlendShapeWeight(a);
                 InfoList.Add(info);
                 GameObject go = content.GetChild(a).gameObject;
                 CharactorFaceSlider slider = go.GetComponent<CharactorFaceSlider>();
